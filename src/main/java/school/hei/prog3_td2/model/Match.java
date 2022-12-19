@@ -1,5 +1,6 @@
 package school.hei.prog3_td2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -28,10 +29,12 @@ public class Match {
     private int id;
     private LocalDateTime datetime;
     private String stadium;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "team_id_1")
+    @JoinColumn(name = "team_id_1", nullable = false)
     private Team team_1;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "team_id_2")
+    @JoinColumn(name = "team_id_2", nullable = false)
     private Team team_2;
 }

@@ -1,5 +1,6 @@
 package school.hei.prog3_td2.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,10 +25,12 @@ public class Sponsoring {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private int id;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "team_id")
+    @JoinColumn(name = "team_id", nullable = false)
     private Team team;
+    @JsonIgnore
     @ManyToOne
-    @JoinColumn(name = "sponsor_id")
+    @JoinColumn(name = "sponsor_id", nullable = false)
     private Sponsor sponsor;
 }
