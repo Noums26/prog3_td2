@@ -1,0 +1,98 @@
+openapi: "3.0.2"
+info:
+  title: HEI - FOOT
+  version: "1.0"
+servers:
+  - url: http://localhost:8080
+tags:
+  - name: Match
+paths:
+  /match:
+    get:
+      summary: Get all Match
+      tags:
+        - "Match"
+      responses:
+        "200":
+          description: All Match
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Match"
+        "400":
+          description: BadRequest
+
+components:
+  schemas:
+    Match:
+      type: object
+      properties:
+        id:
+          type: integer
+        meetingDate:
+          type: string
+          format: date-time
+        homeTeam:
+          $ref: "#/components/schemas/Team"
+        awayTeam:
+          $ref: "#/components/schemas/Team"
+        score:
+          type: array
+          items:
+            $ref: "#/components/schemas/Score"
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+        players:
+          type: array
+          items:
+            $ref: "#/components/schemas/Player"
+        sponsor:
+          type: array
+          items:
+            $ref: "#/components/schemas/Sponsor"
+
+    Player:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    Sponsor:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
+
+    Score:
+      type: object
+      properties:
+        id:
+          type: integer
+        goalTime:
+          type: integer
+        isAgainstOppositeTeam:
+          type: boolean
+        scorerTeam:
+          $ref: "#/components/schemas/ScorerTeam"
+        scorer:
+          $ref: "#/components/schemas/Player"
+
+    ScorerTeam:
+      type: object
+      properties:
+        id:
+          type: integer
+        name:
+          type: string
